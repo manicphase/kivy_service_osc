@@ -1,0 +1,5 @@
+I spent weeks expecting it to be too difficult and a day or two working my way round a few gotchas.
+
+This is just a simple example of a python powered http server running as service on android.
+
+Build it, open it, press buttons, navigate to localhost:5000 in your web browser.

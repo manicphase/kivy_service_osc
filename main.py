@@ -2,9 +2,8 @@ __version__ = '0.1'
 
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.lib import osc
-from kivy.clock import Clock
 from kivy.utils import platform
+import urllib2
 platform = platform()
 
 kv = '''
@@ -31,13 +30,11 @@ BoxLayout:
         size_hint_y: None
         height: '30sp'
         Button:
-            text: 'ping'
-            on_press: app.send()
+            text: 'get'
+            on_press: app.get()
         Button:
             text: 'clear'
             on_press: label.text = ''
-        Label:
-            id: date
 
 '''
 
@@ -46,11 +43,6 @@ class ClientServerApp(App):
     def build(self):
         self.service = None
         self.start_service()
-        osc.init()
-        oscid = osc.listen(port=3002)
-        osc.bind(oscid, self.display_message, '/message')
-        osc.bind(oscid, self.date, '/date')
-        Clock.schedule_interval(lambda *x: osc.readQueue(oscid), 0)
         self.root = Builder.load_string(kv)
         return self.root
 
@@ -66,16 +58,13 @@ class ClientServerApp(App):
             self.service.stop()
             self.service = None
 
-    def send(self, *args):
-        osc.sendMsg('/ping', [], port=3000)
+    def get(self):
+        message = urllib2.urlopen('http://127.0.0.1:5000/random').read()
+        self.display_message(message)
 
-    def display_message(self, message, *args):
+    def display_message(self, message):
         if self.root:
-            self.root.ids.label.text += '%s\n' % message[2]
-
-    def date(self, message, *args):
-        if self.root:
-            self.root.ids.date.text = message[2]
+            self.root.ids.label.text += '%s\n' % message
 
 
 if __name__ == '__main__':

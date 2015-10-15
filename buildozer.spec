@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = Kivy service OSC demo
+title = Kivy service Bottle demo
 
 # (str) Package name
-package.name = oscservice
+package.name = bottleservice
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.kivy
@@ -32,7 +32,7 @@ version.filename = %(source.dir)s/main.py
 # version = 1.2.0
 
 # (list) Application requirements
-requirements = kivy
+requirements = kivy,bottle,cherrypy
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png
@@ -72,7 +72,7 @@ android.permissions = INTERNET
 #android.ndk_path =
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path = 
+#android.sdk_path =
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.renpy.android.PythonActivity
@@ -99,7 +99,7 @@ android.permissions = INTERNET
 #android.ouya.icon.filename = %(source.dir)s/data/ouya_icon.png
 
 # (str) XML file to include as an intent filters in <activity> tag
-#android.manifest.intent_filters = 
+#android.manifest.intent_filters =
 
 # (list) Android additionnal libraries to copy into libs/armeabi
 #android.add_libs_armeabi = libs/android/*.so
@@ -135,7 +135,7 @@ log_level = 2
 
 # -----------------------------------------------------------------------------
 # List as sections
-# 
+#
 # You can define all the "list" as [section:key].
 # Each line will be considered as a option to the list.
 # Let's take [app] / source.exclude_patterns.
